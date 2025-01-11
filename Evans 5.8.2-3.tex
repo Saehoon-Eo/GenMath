@@ -1,0 +1,159 @@
+\documentclass[a4paper]{amsart}
+
+\input{newmacros}
+
+\title{Evans Review -- Section 5.8.2\(\sim\)3}
+\begin{document}
+\maketitle
+
+This note summarize the material of the PDE book written by L.C. Evans, Section 5.8. 
+I want to discuss the a.e. differentiablity of functions, deduced from the integrability condition. 
+
+We define the differential quotient as follows; given \(f\) defined on \(U\) and \(V\subset\subset U\), for sufficiently small nonzero \(h\), we can define 
+\[
+    D_i^h u(x) = \frac{u(x + he_i)-u(x)}{h},
+\]
+for each \(i = 1, \ldots, n\). 
+Note that this is a function defined on \(V\), as long as \(\abs{h}\) is smaller than \(\dist(V, \rd U)\). 
+Also, this respect the integrability condition on \(u\); i.e. if \(u \in L^p(U)\) then \(D_i^h u\in L^p(V)\). 
+
+We first have the following two results.
+\begin{prop*} The followings are true: 
+    \begin{enumerate}
+        \item For \(p\in [1, \infty)\) and \(u\in W^{1, p}(U)\), there is a constant \(C\) depend only on \(n\) such that \(\norm{D^h u}_{L^p(V)}\le C \norm{D u}_{L^p(U)}\).
+        \item For \(p\in (1, \infty)\) and \(u\in L^p\), if there is a constant \(C\) such that \(\norm{D^h u}_{L^p(V)}\le C\) uniformly in small \(h\), then \(u\in W^{1, p}(V)\) with \(\norm{Du}_{L^p}\le C\).
+    \end{enumerate}
+\end{prop*}
+\begin{proof}
+    The first assertion is obviously true. For the second assertion, we consider \(u\) defined on the entire \(U\), to make sense of the expression \(D^h u\).
+    Given \(\phi\in C_c^\infty(V)\), we can consider the following `integration-by-part' for difference quotient: 
+    \[
+        \int_V u(x)\frac{\phi(x+he_i)-\phi(x)}{h} \,dx 
+        = -\int_V \frac{u(x)-u(x-he_i)}{h}\phi(x) \,dx 
+    \]
+    This is true essentially because \(\phi\) vanishes outside \(V\).
+    Using difference quotient notation, this is 
+    \[
+        \int_V u(x)D_i^h \phi(x) \,dx = -\int_V D_i^h u(x)\phi(x) \,dx.
+    \]
+    From the uniform \(L^p\) bound on \(D_i^h u\), we have a weak subsequential limit \(v\): \(D_i^{h_k} u\rightharpoonup v\) in \(k\to \infty\). 
+    Multiplying \(\phi\) and integrate over \(V\) is a continuous functional on \(L^p(V)\), so as \(k\to \infty\), the RHS of above converges to \(-\int_V v(x)\phi(x)\,dx\). 
+    On the other hand, the LHS definitely converges to \(\int_V u(x) \phi_{x_i}(x) \,dx\). Therefore, 
+    \[
+        \int_V u\phi_{x_i} = -\int_V v\phi,
+    \]
+    which proves that \(v = D_i u \in L^p(V)\). 
+    By the weak lower semicontinuity of the norm \(\norm{Du}_{L^p(V)}\le C\).
+\end{proof}
+
+For \(p = \infty\), we have a bit strong statement:
+\begin{prop*} The followings are true: 
+    \begin{enumerate}
+        \item For \(u\colon \RR^n\to \RR\) with compact support, this is Lipschitz continuous if and only if it is in \(W^{1, \infty}(\RR^n)\). 
+        \item For open and bounded \(U\) with \(C^1\) boundary, \(u\colon U\to \RR\) is Lipschitz if and only if it is in \(W^{1, \infty}(U)\).
+    \end{enumerate}
+\end{prop*}
+\begin{proof}
+    (Note that we consider the continuous version of \(u\) given by the Morrey's theorem.) 
+    From the proof it will be evident that the forward direction of the second statement can be proved essentially in the same way with the first statement, and the converse follows from the extension theorem, which requires the boundary regularity of \(U\). 
+    Hence it suffices to prove the first statement only. 
+
+    For \(\Rightarrow\), consider any open ball \(V\subset \RR^n\). For any \(\phi\in C_c^\infty(V)\), we have the integration by part formula, 
+    \[
+        \int_{\RR^n} \phi D_i^h u dx = -\int_{\RR^n} D_i^{-h}\phi u dx.
+    \]
+    Consider the limit \(h\to 0\): The RHS should converge to \(-\int \phi_{x_i}u\), since \(u\) is bounded. 
+    For the LHS, the Lipschitz condition gives the boundedness of \(D_i^h u\) in \(L^2(V)\). 
+    From the weak compactness, we have a weak limit \(v\) with \(h_k\to 0\), \(D_i^{h_k} u\to v\) weakly in \(L^2(V)\) as \(k\to \infty\). 
+    Under this limit the LHS converges to \(\int \phi v\). 
+    This proves that \(v = Du\), in \(V\). 
+    Since we can do this for any open ball \(V\), and in any ball the weak derivative must coincide, we can conclude that there is a weak derivative of \(u\) in \(\RR^n\). 
+    Also, since each \(D_i^{h_k} u\) is pointwisely bounded by the Lipschitz constant, so is its weak limit \(v\), hence \(u\in W^{1, \infty}(\RR^n)\).
+
+    For \(\Leftarrow\), say \(M\) be the \(L^\infty\) bound of \(Du\). 
+    Since we are dealing with the continuous version of \(u\), we know that \(\abs{u(x)-u(y)}\) is the limit of \(\abs{u^\e(x)-u^\e(y)}\) as \(\e\to 0\), where \(u^\e = \et^e * u\). 
+    Note also that it suffices to consider pairs \(x, y\) which shares \(n-1\) coordinates, say the first \(n-1\) coordinates. 
+    Then, we have 
+    \[
+        \abs{u^\e(x)-u^\e(y)}
+        = \abs{\int_{\RR^n} u(z)[\et^\e(x-z)-\et^\e(y-z)] \,dz}
+        = \abs{\int_{\RR^n} Du(z)\phi^\e(z) \,dz}
+        \le M \int_{\RR^n} \abs{\phi^\e(z)} \,dz,
+    \]
+    where \(\phi^\e\) is the function on \(\RR^n\) supported compactly, and satisfies \(\rd_{x_i}\phi^\e(z) = \et^\e(x-z)-\et^\e(y-z)\). 
+    Note that we can express \(\phi^\e\) explicitly, especially its \(L^1\) norm. 
+    This value is bounded by a constant times \(\abs{x-y}\), where the constant depends only on \(\et\). This proves the statement. 
+\end{proof}
+
+
+In case we have a weak derivative with sufficient integrability, we can prove that \(u\) is differentiable (in the classical sense) almost everywhere. 
+\begin{prop*}
+    Given \(u\in W_{loc}^{1, p}(U)\) for \(n< p \le \infty\), \(u\) is differentiable almost everywhere in \(U\), and its derivative is equal to the weak derivative \(Du\) almost everywhere. 
+\end{prop*}
+\begin{proof}
+    By Morrey's inequality, we know that for any \(v\in W^{1, p}(\RR^n)\) the following inequality holds: 
+    \[
+        \abs{v(x)-v(y)}\le C\abs{x-y}^{1-\frac{n}{p}}\left(\int_{B(x, 2\abs{x-y})}\abs{Dv(z)}^p\right)^{\frac{1}{p}},
+    \]
+    where \(C\) is a uniform constant depends only on \(n, p\).
+    Then, using this inequality for the function \(v(y) = u(y) - u(x) - Du(x)\cdot (y-x)\), we have 
+    \[
+        \abs{u(y) - u(x) - Du(x)\cdot (y-x)}
+        \le C\abs{x-y}^{1-\frac{n}{p}}\left(\int_{B(x, 2\abs{x-y})}\abs{Dv(x)-Dv(y)}^p\right)^{\frac{1}{p}}.
+    \]
+    (Note that our \(v\) is in \(W^{1, p}\), in a small neighborhood of \(x\).)
+    The RHS is equal to 
+    \[
+        C\abs{x-y}\left(\frac{1}{\abs{x-y}^n}\int_{B(x, 2\abs{x-y})}\abs{Dv(x)-Dv(y)}^p\right)^{\frac{1}{p}},
+    \]
+    and the term in the parenthesis converges to \(0\) as \(y\to x\), for a.e. \(x\), by \(L^p\) Lebesgue differentiation theorem. 
+    This proves that \(u\) is differentiable at \(x\) and the derivative is \(Du(x)\). 
+\end{proof}
+
+Below I proved the inequality we need for the above proof.
+It is clear that this inequality is sufficient for that statement. 
+\begin{lem*}
+    For \(u\in W^{1, p}(\RR^n)\), given \(x, y\in \RR^n\) with \(r = \abs{x-y}\), we have 
+    \[
+        \abs{u(x)-\frac{1}{\abs{B(x, r)}}\int_{B(x, r)}u(y)dy}
+        \le Cr^{1-\frac{n}{p}}\left(\int_{B(x, r)}\abs{Du(z)}^p\right)^{\frac{1}{p}},
+    \]
+    where \(C\) depends only on \(p\) and \(n\). 
+\end{lem*}
+\begin{proof}
+    We first compare \(u(x)\) with its average on a sphere of radius \(r\). 
+    \begin{align*}
+        v(x) - \frac{1}{\abs{\rd B(x, r)}}\int_{\rd B(x, r)} v(y) d\s(y) 
+        &= \frac{1}{\abs{\rd B(x, r)}}\int_{\rd B(x, r)} v(x) - v(y) d\s(y) \\
+        &= \frac{1}{\abs{\rd B(0, r)}}\int_{\rd B(0, r)}\int_0^1 -Dv(x+tz)\cdot z dtd\s(z) \\
+        &= \frac{1}{\abs{\rd B(0, 1)}}\int_{\rd B(0, 1)}\int_0^1 -Dv(x+trw)\cdot rw dtd\s(w) \\
+        &= \frac{1}{\abs{\rd B(0, 1)}}\int_{B(0, 1)} \frac{-Dv(x+rz)}{\abs{z}^n}rz dV(z) \\
+        \intertext{}
+        &= \frac{1}{\abs{\rd B(0, 1)}}\int_{B(0, r)} \frac{-Dv(x+w)}{\abs{w}^n}w dV(w) \\
+        \intertext{so that }
+        \abs{v(x) - \frac{1}{\abs{\rd B(x, r)}}\int_{\rd B(x, r)} v(y) d\s(y)}
+        &\le C\int_{B(0, r)} \frac{\abs{Dv(x+w)}}{\abs{w}^{n-1}} dV(w) 
+    \end{align*}
+    Especially, we can change the LHS for any smaller radius \(s < r\).
+    Multiplying \(\abs{\rd B(x, s)}\) and integrate over \(s\in [0, r]\), we obtain that 
+    \[
+        \abs{\int_{B(x, r)}v(x)-v(y)d\s(y)}
+        \le Cr^n \int_{B(0, r)} \frac{\abs{Dv(x+w)}}{\abs{w}^{n-1}} dV(w).
+    \]
+    Using H\"older's inequality to the integral, we obtain that 
+    \[
+        \abs{\int_{B(x, r)}v(x)-v(y)d\s(y)}
+        \le Cr^n \left(\int_{B(x, r)}\abs{Dv(y)}^p dV(y)\right)^{\frac{1}{p}}\left(\int_{B(0, r)}\abs{w}^{\frac{(1-n)p}{p-1}} dV(w)\right)^{1-\frac{1}{p}}.
+    \]
+    Calculating the last integral, we have 
+    \[
+        \int_{B(0, r)}\abs{w}^{\frac{(1-n)p}{p-1}} dV(w)
+        = \int_0^r s^{\frac{(1-n)p}{p-1}}s^{n-1} ds = Cr^{\frac{p-n}{p-1}},
+    \]
+    which proves the desired assertion. 
+\end{proof}
+
+
+
+
+\end{document}
