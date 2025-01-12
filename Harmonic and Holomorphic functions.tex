@@ -1,0 +1,76 @@
+\documentclass[a4paper]{amsart}
+
+\input{newmacros}
+
+\title{Schwarz Reflection and Harmonicity-Holomorphicity}
+\begin{document}
+\maketitle
+
+This note summarize the Schwarz reflection lemma and the relation between harmonicity and holomorphicity. 
+Originally I wanted to understand the condition required to extend a harmonic function past through a line segment, and I tried to understand this using the Schwarz reflection lemma on holomorphic functions. 
+This note is incomplete by itself; currently it is just a collection of some relevant facts. 
+
+First, I copy the sequence of statements given in the Stein's Princeton lecture note, with some modifications.
+\begin{lem*}
+    Let \(\O\) be a domain in \(\CC\) intersecting with the real axis.
+    Let \(L = \O\cap \{\Img z = 0\}\), \(\O_+ = \O\cap \{\Img z > 0\}\), and \(\O_- = \O\cap \{\Img z = 0\}\). 
+    If \(f^+\colon \O_+\to \CC\) and \(f^-\colon \O_-\to \CC\) are two holomorphic functions, which can be continuously extended to \(L\), and if their continuous extension agrees on \(L\), then there is a holomorphic `pasting' \(f\) of \(f^+\) and \(f^-\) defined on the entire \(\O\). 
+\end{lem*}
+The proof of this lemma is direct from the Morera's theorem. 
+Note that the conclusion of this lemma is quite significant: We can talk about the complex differentiability of \(f\) on \(L\), where \(f\) was not even defined initially. 
+In other words, we can talk about the boundary regularity of \(f\). 
+In this context, we can summarize that if a holomorphic function, which is analytic only in \(\O^+\) and continuous up to the boundary, is real on \(L\), then actually it is smooth up to the boundary.
+
+One might think that being real on \(L\) is an unnatural condition. 
+Definitely, one can relax this condition; we can prove the following corollary.
+\begin{cor*}
+    With the same setting, say \(f|_L\) is an analytic function near \(z\in L\).
+    Then, \(f\) can be extended to a holomorphic function defined in a small disk containing \(z\). 
+\end{cor*}
+\begin{proof}
+    Say \(f|_L(z) = \sum_{n=0}^{\infty} \frac{a_n}{n!}z^n\) near \(z\).
+    Then, the function \(g(z) = \sum_{n=0}^{\infty} \frac{a_n}{n!}z^n\) defined in a disk containing \(z\) is holomorphic.
+    Further, \(f - g\) is zero on \(L\) intersect this disk, hence by the lemma above it can be extended in the entire disk. 
+    Adding \(g\) again we obtain a holomorphic function on the disk, which completes the proof.
+\end{proof}
+Note that this is also a necessary condition, as any holomorphic function is analytic in a disc that it is defined.
+
+One interesting consequence occurs when we try to relate real harmonic functions with the holomorphic functions. 
+To do this, we need to state the following standard fact. 
+\begin{lem*}
+    Let \(f\colon \RR^2\to \RR\) be a harmonic function. 
+    Then, there is a holomorphic function \(g\colon \CC\to \CC\) with \(\im g(z) = f(z)\), where we identify \(\RR^2\) with \(\CC\). 
+\end{lem*}
+\begin{proof}
+    From the harmonicity, there is a function \(\ftil\) satisfying \(\ftil_x = -f_y\) and \(\ftil_y = f_x\), being an exact differential form. 
+    Therefore, we can define \(g(z) = f(z) + i\ftil(z)\). 
+    The above relation gives \(\frac{d}{d\zbar}g = 0\).
+\end{proof}
+
+Now we shall discuss the boundary regularity of harmonic functions. 
+Given a smooth function \(g\colon L\to \RR\), if there is a holomorphic function \(f\colon \O_+\to \CC\) which continuously extends to \(g\) on \(L\), then \(g\) should actually be an analytic function, and \(f\) can be holomorphically extended past \(L\). 
+To translate this into harmonic functions, we should consider the real part of \(f\), which should match with \(g\) on \(L\), and plus, its imaginary counterpart should vanish on \(L\). 
+This means, \(\ftil_x = 0\) using the above notation, i.e. \(f_y = 0\). 
+Therefore, we can argue that, if there is a harmonic function \(f\) which is equal to \(g\) on \(L\), and has zero \(y\) derivative on \(L\), then \(f\) can be harmonically extended past \(L\).
+We state this fact into a lemma, and prove this in a PDE dialect, without referring to the reflection principle. 
+
+\begin{lem*}
+    Let \(h\colon \O_+\to \RR\) be a harmonic function with \(h|_L = g\) and \(h_y = 0\). 
+    Then, \(g\) is actually real analytic, and \(h\) can be defined past \(L\) with being harmonic. 
+\end{lem*}
+\begin{proof}
+    We prove that \(h_y\) can be harmonically extended first: Since \(h_y\) is harmonic in \(\O_+\) and identically \(0\) on \(L\), we can negatively reflect this onto \(\O_-\).
+    Note that this is sufficiently regular on \(\O_+\cup\O_-\).
+    On \(L\), this is infinitely \(x\)-differentiable, and being a reflection, at least twice differentiable in \(y\) as well, especially the second derivative vanishes. 
+    Therefore, \(h_y\) is harmonic in \(\O\). 
+    Now, since \(h\) is already real analytic on any horizontal segment in \(\O^+\), using integral we can prove that \(g\) is real analytic. 
+    Being an \(y\)-integral of harmonic function from a real analytic function, we obtain that \(h\) is harmonic on \(\O\). 
+\end{proof}
+
+I want to check the regularity conditions, based on the things that I do in the last note. 
+The regularity theorems given in Evans might help. Let's review them. 
+
+
+
+
+\end{document}
